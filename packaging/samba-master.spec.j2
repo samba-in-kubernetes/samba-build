@@ -2071,6 +2071,7 @@ fi
 %{_libdir}/samba/libauth4-samba4.so
 
 %if %{with dc} || %{with testsuite}
+%{_libdir}/samba/libad-claims-samba4.so
 %{_libdir}/samba/libdb-glue-samba4.so
 %{_libdir}/samba/libpac-samba4.so
 %{_libdir}/samba/libprocess-model-samba4.so
@@ -2440,6 +2441,16 @@ fi
 %{python3_sitearch}/samba/netcmd/*.py
 %dir %{python3_sitearch}/samba/netcmd/__pycache__
 %{python3_sitearch}/samba/netcmd/__pycache__/*.*.pyc
+
+%dir %{python3_sitearch}/samba/netcmd/domain
+%{python3_sitearch}/samba/netcmd/domain/*.py
+%dir %{python3_sitearch}/samba/netcmd/domain/__pycache__
+%{python3_sitearch}/samba/netcmd/domain/__pycache__/*.*.pyc
+
+%dir %{python3_sitearch}/samba/netcmd/domain/claim
+%{python3_sitearch}/samba/netcmd/domain/claim/*.py
+%dir %{python3_sitearch}/samba/netcmd/domain/claim/__pycache__
+%{python3_sitearch}/samba/netcmd/domain/claim/__pycache__/*.*.pyc
 
 %dir %{python3_sitearch}/samba/samba3
 %{python3_sitearch}/samba/samba3/*.py

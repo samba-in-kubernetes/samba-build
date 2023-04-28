@@ -5,7 +5,7 @@
   vars_files:
     - vars.yml
   vars:
-    version: "stream9"
+    version: "9s"
     vm: "centos{{ version }}"
   roles:
     - del.vm

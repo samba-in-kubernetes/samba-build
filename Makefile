@@ -20,7 +20,7 @@ del.vm.centos8:
 	@ansible-playbook --inventory localhost, ./ansible/del.vm.centos8.yml
 
 test.rpms.centos8: prep.vm.centos8
-	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.centosstream8 ./ansible/test.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
+	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.centos8s ./ansible/test.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
 
 rpms.centos9:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
@@ -32,7 +32,7 @@ del.vm.centos9:
 	@ansible-playbook --inventory localhost, ./ansible/del.vm.centos9.yml
 
 test.rpms.centos9: prep.vm.centos9
-	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.centosstream9 ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
+	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.centos9s ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
 
 
 vers = 36

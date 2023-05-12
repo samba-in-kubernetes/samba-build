@@ -36,6 +36,8 @@
     - /etc/mock/centos-stream+epel-next-8-x86_64.cfg
     - /etc/mock/centos-stream+epel-next-9-x86_64.cfg
     - glusterfs-nightly-repo.tpl
+    - ceph-el8-dev-repo.tpl.j2
+    - ceph-el9-dev-repo.tpl.j2
 
 - name: copy fedora mock config files
   copy:
@@ -44,11 +46,7 @@
   with_fileglob:
     - "/etc/mock/fedora-*-x86_64.cfg"
 
-- name: adapt mock config to use additional template
-  lineinfile:
-    path: "{{ item }}"
-    insertafter: EOF
-    line: "include('{{ mock_dir }}/glusterfs-nightly-repo.tpl')"
+- include_tasks: repo.yml
   with_items:
-    - "{{ mock_dir }}/centos-stream+epel-next-8-x86_64.cfg"
-    - "{{ mock_dir }}/centos-stream+epel-next-9-x86_64.cfg"
+    - "8"
+    - "9"

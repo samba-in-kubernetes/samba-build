@@ -35,6 +35,11 @@
 - name: Enable GlusterFS nightly rpms repository
   command: yum-config-manager --add-repo http://artifacts.ci.centos.org/gluster/nightly/master.repo
 
+- name: Enable Ceph development rpms repository
+  yum:
+    name: "{{ ceph_release_rpm_base_url }}/noarch/ceph-release-1-0.el{{ ansible_distribution_major_version }}.noarch.rpm"
+    disable_gpg_check: true
+
 - name: Detect samba test build version
   command: dnf repoquery -q --disablerepo='*' --enablerepo=samba-{{ vers }}-test-rpms --arch x86_64 --qf '%{version}-%{release}' samba
   register: test_build_vers
@@ -48,4 +53,5 @@
     - samba-{{ test_build_vers.stdout }}
     - samba-test-{{ test_build_vers.stdout }}
     - samba-vfs-glusterfs-{{ test_build_vers.stdout }}
+    - samba-vfs-cephfs-{{ test_build_vers.stdout }}
     - "{{ (ansible_distribution_major_version == '9') | ternary('samba-dc-' + test_build_vers.stdout, omit) }}"

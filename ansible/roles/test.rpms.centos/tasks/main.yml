@@ -42,8 +42,10 @@
 - name: try installing our samba packages
   yum:
     name: "{{ item }}"
+    enablerepo: "{{ (ansible_distribution_major_version == '9') | ternary('crb', omit) }}"
     state: latest
   loop:
     - samba-{{ test_build_vers.stdout }}
     - samba-test-{{ test_build_vers.stdout }}
     - samba-vfs-glusterfs-{{ test_build_vers.stdout }}
+    - "{{ (ansible_distribution_major_version == '9') | ternary('samba-dc-' + test_build_vers.stdout, omit) }}"

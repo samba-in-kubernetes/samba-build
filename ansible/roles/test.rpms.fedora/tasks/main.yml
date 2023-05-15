@@ -42,3 +42,4 @@
     - samba-{{ test_build_vers.stdout}}
     - samba-test-{{ test_build_vers.stdout }}
     - samba-vfs-glusterfs-{{ test_build_vers.stdout }}
+    - samba-dc-{{ test_build_vers.stdout }}

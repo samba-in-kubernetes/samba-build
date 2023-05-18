@@ -100,12 +100,6 @@
 #
 # https://src.fedoraproject.org/rpms/redhat-rpm-config/blob/master/f/buildflags.md
 %undefine _strict_symbol_defs_build
-# Disable .package_note file generation, see bug for details
-#
-# https://bugzilla.redhat.com/show_bug.cgi?id=2043178
-%if 0%{?fedora} >= 36
-%undefine _package_note_file
-%endif
 
 %global libwbc_alternatives_version 0.16
 %global libwbc_alternatives_suffix %nil
@@ -1174,20 +1168,16 @@ rm -f lib/crypto/{aes,rijndael}*.c
 
 %global _samba_private_libraries %{_libsmbclient}%{_libwbclient}
 
-# TODO: resolve underlinked python modules
-export python_LDFLAGS="$(echo %{__global_ldflags} | sed -e 's/-Wl,-z,defs//g')"
-
-%if 0%{?fedora} || 0%{?rhel} < 9
-# Use the gold linker
-export LDFLAGS="%{__global_ldflags} -fuse-ld=gold"
-export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
-%endif
-
 %if 0%{?fedora} >= 37
 # Use the mold linker
 export LDFLAGS="%{__global_ldflags} -fuse-ld=mold"
-export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
+%else
+# Use the gold linker
+export LDFLAGS="%{__global_ldflags} -fuse-ld=gold"
 %endif
+
+# TODO: resolve underlinked python modules
+export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
 
 %configure \
         --enable-fhs \

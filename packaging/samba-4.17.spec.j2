@@ -97,12 +97,6 @@
 #
 # https://src.fedoraproject.org/rpms/redhat-rpm-config/blob/master/f/buildflags.md
 %undefine _strict_symbol_defs_build
-# Disable .package_note file generation, see bug for details
-#
-# https://bugzilla.redhat.com/show_bug.cgi?id=2043178
-%if 0%{?fedora} >= 36
-%undefine _package_note_file
-%endif
 
 %global libwbc_alternatives_version 0.15
 %global libwbc_alternatives_suffix %nil
@@ -251,6 +245,10 @@ BuildRequires: xz
 BuildRequires: zlib-devel >= 1.2.3
 
 BuildRequires: pkgconfig(libsystemd)
+
+%if 0%{?fedora} >= 37
+BuildRequires: mold
+%endif
 
 %if %{with vfs_glusterfs}
 BuildRequires: libgfapi-devel >= 3.4.0.16
@@ -1115,13 +1113,16 @@ Support for using an existing CEPH cluster as a mutex helper for CTDB
 
 %global _samba_private_libraries %{_libsmbclient}%{_libwbclient}
 
-# TODO: resolve underlinked python modules
-export python_LDFLAGS="$(echo %{__global_ldflags} | sed -e 's/-Wl,-z,defs//g')"
-
-%if 0%{?fedora} || 0%{?rhel} < 9
+%if 0%{?fedora} >= 37
+# Use the mold linker
+export LDFLAGS="%{__global_ldflags} -fuse-ld=mold"
+%else
 # Use the gold linker
 export LDFLAGS="%{__global_ldflags} -fuse-ld=gold"
 %endif
+
+# TODO: resolve underlinked python modules
+export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
 
 %configure \
         --enable-fhs \

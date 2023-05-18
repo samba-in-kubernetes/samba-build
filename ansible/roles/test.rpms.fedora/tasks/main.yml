@@ -1,46 +1,14 @@
 ---
-- name: Perform a complete update
-  yum:
-    name: '*'
-    state: latest
-
-- name : install createrepo package
-  yum:
-    name: createrepo_c
-    state: latest
-
-- name: sync test build rpm directory
-  synchronize:
-    src: "{{ rpms_dir }}/"
-    dest: "/tmp/testbuild"
-
-- name: create yum repo from test build
-  command: createrepo_c .
-  args:
-    chdir: "/tmp/testbuild/{{ vers }}/fedora/{{ ansible_distribution_major_version }}/x86_64"
-
-- name: enable test build yum repository
-  yum_repository:
-    name: samba-{{ vers }}-test-rpms
-    description: Samba {{ vers }} test rpms repository
-    baseurl: "file:///tmp/testbuild/{{ vers }}/fedora/$releasever/$basearch"
-    enabled: yes
-    gpgcheck: no
-
-- name: Detect samba test build version
-  command: dnf repoquery -q --disablerepo='*' --enablerepo=samba-{{ vers }}-test-rpms --arch x86_64 --qf '%{version}-%{release}' samba
-  register: test_build_vers
-
-# Since we do not have nightly GlusterFS packages built for Fedora, we make use
-# of official released versions from standard Fedora repositories
-
-- name: try installing our samba packages
-  yum:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - samba-{{ test_build_vers.stdout}}
-    - samba-test-{{ test_build_vers.stdout }}
-    - samba-vfs-glusterfs-{{ test_build_vers.stdout }}
-    - samba-vfs-cephfs-{{ test_build_vers.stdout }}
-    - samba-dc-{{ test_build_vers.stdout }}
+- name: Test installation of test build rpms in a container
+  containers.podman.podman_container:
+    name: "fedora{{ os_vers }}"
+    image: "registry.fedoraproject.org/fedora:{{ os_vers }}"
+    command: /tmp/files/rpm-install.sh
+    detach: false
+    rm: true
+    volume:
+      - "{{ role_path }}/files/:/tmp/files/:z"
+      - "{{ rpms_dir }}:/tmp/testbuild/:z"
+    env:
+      OS_VERS: "{{ os_vers }}"
+      SAMBA_VERS: "{{ samba_major_version }}"

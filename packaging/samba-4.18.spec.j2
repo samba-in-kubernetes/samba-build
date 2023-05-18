@@ -12,8 +12,9 @@
 # Define _make_verbose if it doesn't exist (RHEL8)
 %{!?_make_verbose:%define _make_verbose V=1 VERBOSE=1}
 
-# Build with Active Directory Domain Controller support by default on Fedora
-%if 0%{?fedora} >= 34
+# Build with Active Directory Domain Controller support by default on Fedora and
+# RHEL >= 9
+%if 0%{?rhel} >= 9 || 0%{?fedora} >= 34
 %bcond_without dc
 %else
 %bcond_with dc

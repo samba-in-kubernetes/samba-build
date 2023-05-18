@@ -13,26 +13,14 @@ srpm:
 rpms.centos8:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
 
-prep.vm.centos8:
-	@ansible-playbook --inventory localhost, ./ansible/prep.vm.centos8.yml
-
-del.vm.centos8:
-	@ansible-playbook --inventory localhost, ./ansible/del.vm.centos8.yml
-
-test.rpms.centos8: prep.vm.centos8
-	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.centos8s ./ansible/test.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
+test.rpms.centos8:
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
 
 rpms.centos9:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
 
-prep.vm.centos9:
-	@ansible-playbook --inventory localhost, ./ansible/prep.vm.centos9.yml
-
-del.vm.centos9:
-	@ansible-playbook --inventory localhost, ./ansible/del.vm.centos9.yml
-
-test.rpms.centos9: prep.vm.centos9
-	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.centos9s ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
+test.rpms.centos9:
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
 
 
 vers = 38
@@ -40,11 +28,5 @@ vers = 38
 rpms.fedora:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --extra-vars "version=$(vers) refspec=$(refspec)"
 
-prep.vm.fedora:
-	@ansible-playbook --inventory localhost, ./ansible/prep.vm.fedora.yml --extra-vars "version=$(vers)"
-
-del.vm.fedora:
-	@ansible-playbook --inventory localhost, ./ansible/del.vm.fedora.yml --extra-vars "version=$(vers)"
-
-test.rpms.fedora: prep.vm.fedora
-	@ansible-playbook --inventory ./ansible/vagrant_ansible_inventory.fedora$(vers) ./ansible/test.rpms.fedora.yml --extra-vars "version=$(vers) refspec=$(refspec)"
+test.rpms.fedora:
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.fedora.yml --extra-vars "version=$(vers) refspec=$(refspec)"

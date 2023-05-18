@@ -4,19 +4,10 @@
   become: no
   vars:
     refspec: "{{ refspec }}"
+    os_vers: "8"
   vars_files:
     - vars.yml
   roles:
     - prep.dirs
     - set.version
-
-- hosts: centos8s
-  become: yes
-  become_method: sudo
-  vars:
-    vers: "{{ hostvars['localhost']['samba_major_version'] }}"
-    ceph_release_rpm_base_url: "{{ hostvars['localhost']['ceph_el8_repo_base_url'] }}"
-  vars_files:
-    - vars.yml
-  roles:
     - test.rpms.centos

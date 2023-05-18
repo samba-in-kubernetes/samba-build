@@ -9,8 +9,9 @@
 # ctdb is enabled by default, you can disable it with: --without clustering
 %bcond_without clustering
 
-# Build with Active Directory Domain Controller support by default on Fedora
-%if 0%{?fedora} >= 34
+# Build with Active Directory Domain Controller support by default on Fedora and
+# RHEL >= 9
+%if 0%{?rhel} >= 9 || 0%{?fedora} >= 34
 %bcond_without dc
 %else
 %bcond_with dc
@@ -233,7 +234,7 @@ BuildRequires: perl(Archive::Tar)
 BuildRequires: perl(Test::More)
 BuildRequires: popt-devel
 BuildRequires: python3-devel
-#BuildRequires: python3-dns
+BuildRequires: python3-dns
 #BuildRequires: python3-setuptools
 BuildRequires: quota-devel
 BuildRequires: readline-devel
@@ -468,7 +469,6 @@ Requires: python3-setproctitle
 # See bug 1507420
 %samba_requires_eq libldb
 
-Requires: python3-crypto
 Requires: python3-%{name} = %{samba_depver}
 Requires: python3-%{name}-dc = %{samba_depver}
 Requires: krb5-server >= %{required_mit_krb5}

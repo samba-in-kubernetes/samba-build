@@ -6,11 +6,6 @@
 
 - name: adapt mock config to use additional template for ceph
   block:
-    - name: install jq
-      yum:
-        name: jq
-        state: latest
-
     - name: determine ceph repo base url
       shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros=centos/{{ item }}/x86_64&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
       register: get_ceph_repo_url

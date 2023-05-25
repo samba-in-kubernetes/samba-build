@@ -1,5 +1,0 @@
----
-- name: delete {{ vm }} vm
-  shell: VERS={{ version }} vagrant destroy --no-tty --force {{ vm }}
-  args:
-    chdir: ../vagrant

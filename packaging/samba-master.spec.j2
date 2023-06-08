@@ -42,19 +42,12 @@
 #endifarch
 %endif
 
-# Build vfs_io_uring module by default on 64bit Fedora
-%if 0%{?fedora}
-
+# Build vfs_io_uring module by default
 %ifarch aarch64 ppc64le s390x x86_64
 %bcond_without vfs_io_uring
 %else
 %bcond_with vfs_io_uring
 #endifarch
-%endif
-
-%else
-%bcond_with vfs_io_uring
-#endif fedora
 %endif
 
 %ifarch aarch64 ppc64le s390x x86_64

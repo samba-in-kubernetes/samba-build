@@ -14,7 +14,7 @@
 
 # Build with Active Directory Domain Controller support by default on Fedora and
 # RHEL >= 9
-%if 0%{?rhel} >= 9 || 0%{?fedora} >= 34
+%if 0%{?rhel} >= 9 || 0%{?fedora} >= 38
 %bcond_without dc
 %else
 %bcond_with dc
@@ -101,7 +101,7 @@
 %endif
 
 %if %{with dc} || %{with testsuite}
-%global required_mit_krb5 1.19
+%global required_mit_krb5 1.21
 %else
 %global required_mit_krb5 1.15.1
 %endif

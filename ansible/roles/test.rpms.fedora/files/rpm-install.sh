@@ -24,15 +24,19 @@ enabled=1
 gpgcheck=0
 EOF
 
-# Since we do not have nightly GlusterFS packages built for Fedora, we make use
-# of official released versions from standard Fedora repositories
+# Since we do not have GlusterFS(master) and CephFS(main) packages built for
+# Fedora, we make use of official released versions from standard Fedora
+# repositories.
 
 test_build_vers=$(dnf repoquery -q --disablerepo='*' \
 			--enablerepo=samba-${samba_version}-test-rpms \
 			--arch x86_64 --qf '%{version}-%{release}' samba)
 
 pkgs=(samba-${test_build_vers} samba-test-${test_build_vers} \
-	samba-vfs-glusterfs-${test_build_vers} samba-vfs-cephfs-${test_build_vers} \
-	samba-dc-${test_build_vers})
+	samba-vfs-glusterfs-${test_build_vers} samba-vfs-cephfs-${test_build_vers})
+
+if [ "${os_version}" -ge 38 ]; then
+	pkgs+=(samba-dc-${test_build_vers})
+fi
 
 dnf -y install ${pkgs[@]}

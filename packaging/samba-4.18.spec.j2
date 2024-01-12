@@ -1119,7 +1119,7 @@ Support for using an existing CEPH cluster as a mutex helper for CTDB
 
 %prep
 
-%setup -q -n %{name}-%{version}%{pre_release}
+%autosetup -n %{name}-%{version}%{pre_release} -p1
 
 # Ensure we rely on GnuTLS and do not build any other crypto code shipping with
 # the sources.

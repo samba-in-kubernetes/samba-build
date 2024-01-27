@@ -1731,6 +1731,7 @@ fi
 %{_bindir}/smbspool
 %{_bindir}/smbtar
 %{_bindir}/smbtree
+%{_bindir}/wspsearch
 %dir %{_libexecdir}/samba
 %ghost %{_libexecdir}/samba/cups_backend_smb
 %{_libexecdir}/samba/samba-bgqd
@@ -2107,6 +2108,7 @@ fi
 %{_libexecdir}/samba/rpcd_fsrvp
 %{_libexecdir}/samba/rpcd_lsad
 %{_libexecdir}/samba/rpcd_mdssvc
+%{_libexecdir}/samba/rpcd_witness
 %if %{with testsuite}
 %{_libexecdir}/samba/rpcd_rpcecho
 %endif

@@ -2407,6 +2407,16 @@ fi
 %{python3_sitearch}/samba/dcerpc/*.py
 %{python3_sitearch}/samba/dcerpc/*.*.so
 
+%dir %{python3_sitearch}/samba/domain
+%{python3_sitearch}/samba/domain/*.py
+%dir %{python3_sitearch}/samba/domain/__pycache__
+%{python3_sitearch}/samba/domain/__pycache__/*.*.pyc
+
+%dir %{python3_sitearch}/samba/domain/models
+%{python3_sitearch}/samba/domain/models/*.py
+%dir %{python3_sitearch}/samba/domain/models/__pycache__
+%{python3_sitearch}/samba/domain/models/__pycache__/*.*.pyc
+
 %dir %{python3_sitearch}/samba/emulate
 %dir %{python3_sitearch}/samba/emulate/__pycache__
 %{python3_sitearch}/samba/emulate/__pycache__/*.*.pyc
@@ -2451,11 +2461,6 @@ fi
 %{python3_sitearch}/samba/netcmd/domain/kds/*.py
 %dir %{python3_sitearch}/samba/netcmd/domain/kds/__pycache__
 %{python3_sitearch}/samba/netcmd/domain/kds/__pycache__/*.*.pyc
-
-%dir %{python3_sitearch}/samba/netcmd/domain/models
-%{python3_sitearch}/samba/netcmd/domain/models/*.py
-%dir %{python3_sitearch}/samba/netcmd/domain/models/__pycache__
-%{python3_sitearch}/samba/netcmd/domain/models/__pycache__/*.*.pyc
 
 %dir %{python3_sitearch}/samba/netcmd/service_account
 %{python3_sitearch}/samba/netcmd/service_account/*.py

@@ -23,7 +23,7 @@ test.rpms.centos9:
 	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
 
 
-vers = 38
+vers = 40
 
 rpms.fedora:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --extra-vars "version=$(vers) refspec=$(refspec)"

@@ -1383,16 +1383,6 @@ done
 # the ldconfig-created links be recorded in the RPM.
 /sbin/ldconfig -N -n %{buildroot}%{_libdir}
 
-%if %{without dc} && %{without testsuite}
-for f in samba/libsamba-net-private-samba.so \
-         samba/libsamba-python-private-samba.so \
-         libsamba-policy.so* \
-         pkgconfig/samba-policy.pc ; do
-    rm -f %{buildroot}%{_libdir}/$f
-done
-#endif {without dc} && {without testsuite}
-%endif
-
 pushd pidl
 make DESTDIR=%{buildroot} install_vendor
 
@@ -1793,16 +1783,11 @@ fi
 %{_libdir}/libndr-krb5pac.so.*
 %{_libdir}/libndr-nbt.so.*
 %{_libdir}/libndr-standard.so.*
-%{_libdir}/libsamba-credentials.so.*
 %{_libdir}/libsamba-errors.so.*
 %{_libdir}/libsamba-passdb.so.*
 %{_libdir}/libsamba-util.so.*
-%{_libdir}/libsamba-hostconfig.so.*
-%{_libdir}/libsamdb.so.*
 %{_libdir}/libsmbconf.so.*
 %{_libdir}/libsmbldap.so.*
-%{_libdir}/libtevent-util.so.*
-%{_libdir}/libdcerpc.so.*
 
 %dir %{_libdir}/samba
 %{_libdir}/samba/libCHARSET3-private-samba.so
@@ -1827,6 +1812,7 @@ fi
 %{_libdir}/samba/libctdb-event-client-private-samba.so
 %{_libdir}/samba/libdbwrap-private-samba.so
 %{_libdir}/samba/libdcerpc-pkt-auth-private-samba.so
+%{_libdir}/samba/libdcerpc-private-samba.so
 %{_libdir}/samba/libdcerpc-samba-private-samba.so
 %{_libdir}/samba/libevents-private-samba.so
 %{_libdir}/samba/libflag-mapping-private-samba.so
@@ -1859,12 +1845,17 @@ fi
 %{_libdir}/samba/libreplace-private-samba.so
 %{_libdir}/samba/libregistry-private-samba.so
 %{_libdir}/samba/libsamba-cluster-support-private-samba.so
+%{_libdir}/samba/libsamba-credentials-private-samba.so
 %{_libdir}/samba/libsamba-debug-private-samba.so
+%{_libdir}/samba/libsamba-hostconfig-private-samba.so
 %{_libdir}/samba/libsamba-modules-private-samba.so
+%{_libdir}/samba/libsamba-net-private-samba.so
+%{_libdir}/samba/libsamba-policy-private-samba.so
 %{_libdir}/samba/libsamba-security-private-samba.so
 %{_libdir}/samba/libsamba-sockets-private-samba.so
 %{_libdir}/samba/libsamba3-util-private-samba.so
 %{_libdir}/samba/libsamdb-common-private-samba.so
+%{_libdir}/samba/libsamdb-private-samba.so
 %{_libdir}/samba/libsecrets3-private-samba.so
 %{_libdir}/samba/libserver-id-db-private-samba.so
 %{_libdir}/samba/libserver-role-private-samba.so
@@ -2087,7 +2078,7 @@ fi
 %{_libdir}/samba/service/smb.so
 %endif
 
-%{_libdir}/libdcerpc-server.so.*
+%{_libdir}/samba/libdcerpc-server-private-samba.so
 %{_libdir}/samba/libdsdb-module-private-samba.so
 %{_libdir}/samba/libdsdb-garbage-collect-tombstones-private-samba.so
 %{_libdir}/samba/libscavenge-dns-records-private-samba.so
@@ -2137,8 +2128,6 @@ fi
 %{_includedir}/samba-4.0/core/ntstatus_gen.h
 %{_includedir}/samba-4.0/core/werror.h
 %{_includedir}/samba-4.0/core/werror_gen.h
-%{_includedir}/samba-4.0/credentials.h
-%{_includedir}/samba-4.0/dcerpc.h
 %{_includedir}/samba-4.0/dcesrv_core.h
 %{_includedir}/samba-4.0/domain_credentials.h
 %{_includedir}/samba-4.0/gen_ndr/atsvc.h
@@ -2159,7 +2148,6 @@ fi
 %{_includedir}/samba-4.0/gen_ndr/ndr_misc.h
 %{_includedir}/samba-4.0/gen_ndr/ndr_nbt.h
 %{_includedir}/samba-4.0/gen_ndr/ndr_samr.h
-%{_includedir}/samba-4.0/gen_ndr/ndr_samr_c.h
 %{_includedir}/samba-4.0/gen_ndr/ndr_svcctl.h
 %{_includedir}/samba-4.0/gen_ndr/ndr_svcctl_c.h
 %{_includedir}/samba-4.0/gen_ndr/netlogon.h
@@ -2179,9 +2167,7 @@ fi
 %{_includedir}/samba-4.0/ndr/ndr_krb5pac.h
 %{_includedir}/samba-4.0/ndr/ndr_svcctl.h
 %{_includedir}/samba-4.0/ndr/ndr_nbt.h
-%{_includedir}/samba-4.0/param.h
 %{_includedir}/samba-4.0/passdb.h
-%{_includedir}/samba-4.0/policy.h
 %{_includedir}/samba-4.0/rpc_common.h
 %{_includedir}/samba-4.0/samba/session.h
 %{_includedir}/samba-4.0/samba/version.h
@@ -2206,44 +2192,27 @@ fi
 %{_includedir}/samba-4.0/util/idtree_random.h
 %{_includedir}/samba-4.0/util/signal.h
 %{_includedir}/samba-4.0/util/substitute.h
-%{_includedir}/samba-4.0/util/tevent_ntstatus.h
-%{_includedir}/samba-4.0/util/tevent_unix.h
-%{_includedir}/samba-4.0/util/tevent_werror.h
 %{_includedir}/samba-4.0/util/time.h
 %{_includedir}/samba-4.0/util/tfork.h
 %{_includedir}/samba-4.0/util_ldb.h
 %{_libdir}/libdcerpc-binding.so
-%{_libdir}/libdcerpc-samr.so
-%{_libdir}/libdcerpc.so
 %{_libdir}/libndr-krb5pac.so
 %{_libdir}/libndr-nbt.so
 %{_libdir}/libndr-standard.so
 %{_libdir}/libndr.so
-%{_libdir}/libsamba-credentials.so
 %{_libdir}/libsamba-errors.so
-%{_libdir}/libsamba-hostconfig.so
 %{_libdir}/libsamba-util.so
-%{_libdir}/libsamdb.so
 %{_libdir}/libsmbconf.so
-%{_libdir}/libtevent-util.so
-%{_libdir}/pkgconfig/dcerpc.pc
-%{_libdir}/pkgconfig/dcerpc_samr.pc
 %{_libdir}/pkgconfig/ndr.pc
 %{_libdir}/pkgconfig/ndr_krb5pac.pc
 %{_libdir}/pkgconfig/ndr_nbt.pc
 %{_libdir}/pkgconfig/ndr_standard.pc
-%{_libdir}/pkgconfig/samba-credentials.pc
-%{_libdir}/pkgconfig/samba-hostconfig.pc
 %{_libdir}/pkgconfig/samba-util.pc
-%{_libdir}/pkgconfig/samdb.pc
 %{_libdir}/libsamba-passdb.so
 %{_libdir}/libsmbldap.so
 
 %if %{with dc} || %{with testsuite}
-%{_includedir}/samba-4.0/dcerpc_server.h
-%{_libdir}/libdcerpc-server.so
 %{_libdir}/libdcerpc-server-core.so
-%{_libdir}/pkgconfig/dcerpc_server.pc
 %endif
 
 %if %{without libsmbclient}
@@ -2299,11 +2268,10 @@ fi
 
 ### LIBS
 %files libs
-%{_libdir}/libdcerpc-samr.so.*
-
 %{_libdir}/samba/libLIBWBCLIENT-OLD-private-samba.so
 %{_libdir}/samba/libauth-unix-token-private-samba.so
 %{_libdir}/samba/libdcerpc-samba4-private-samba.so
+%{_libdir}/samba/libdcerpc-samr-private-samba.so
 %{_libdir}/samba/libdnsserver-common-private-samba.so
 %{_libdir}/samba/libshares-private-samba.so
 %{_libdir}/samba/libsmbpasswdparser-private-samba.so
@@ -2503,8 +2471,7 @@ fi
 %dir %{python3_sitearch}/samba/subunit/__pycache__
 %{python3_sitearch}/samba/subunit/__pycache__/*.*.pyc
 
-%{_libdir}/libsamba-policy.cpython*.so.*
-%{_libdir}/samba/libsamba-net.*-private-samba.so
+%{_libdir}/samba/libsamba-net-join.*-private-samba.so
 %{_libdir}/samba/libsamba-python.*-private-samba.so
 
 %{_libdir}/samba/libpyldb-util.cpython*.so
@@ -2522,9 +2489,6 @@ fi
 %{python3_sitearch}/ldb.*.so
 
 %files -n python3-%{name}-devel
-%{_libdir}/libsamba-policy.*.so
-%{_libdir}/pkgconfig/samba-policy.*.pc
-
 %if %{with dc} || %{with testsuite}
 %files -n python3-%{name}-dc
 %{python3_sitearch}/samba/samdb.py

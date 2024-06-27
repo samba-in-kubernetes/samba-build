@@ -1589,6 +1589,9 @@ fi
 %{_libdir}/samba/vfs/btrfs.so
 %{_libdir}/samba/vfs/cap.so
 %{_libdir}/samba/vfs/catia.so
+%if %{with vfs_cephfs}
+%{_libdir}/samba/vfs/ceph_snapshots.so
+%endif
 %{_libdir}/samba/vfs/commit.so
 %{_libdir}/samba/vfs/crossrename.so
 %{_libdir}/samba/vfs/default_quota.so
@@ -1655,6 +1658,9 @@ fi
 %{_mandir}/man8/vfs_btrfs.8*
 %{_mandir}/man8/vfs_cap.8*
 %{_mandir}/man8/vfs_catia.8*
+%if %{with vfs_cephfs}
+%{_mandir}/man8/vfs_ceph_snapshots.8*
+%endif
 %{_mandir}/man8/vfs_commit.8*
 %{_mandir}/man8/vfs_crossrename.8*
 %{_mandir}/man8/vfs_default_quota.8*
@@ -2229,9 +2235,7 @@ fi
 %if %{with vfs_cephfs}
 %files vfs-cephfs
 %{_libdir}/samba/vfs/ceph.so
-%{_libdir}/samba/vfs/ceph_snapshots.so
 %{_mandir}/man8/vfs_ceph.8*
-%{_mandir}/man8/vfs_ceph_snapshots.8*
 %endif
 
 ### VFS-IOURING

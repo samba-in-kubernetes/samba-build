@@ -15,6 +15,9 @@ srpm:
 	@ansible-playbook --inventory localhost, ./ansible/build.srpm.yml --extra-vars "refspec=$(refspec)"
 
 
+rpms.centos:
+	@ansible-playbook --inventory localhost, ./ansible/build.rpms.centos.yml --extra-vars "$(EXTRA_VARS)"
+
 rpms.centos8:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
 

@@ -1,4 +1,9 @@
 refspec = master
+EXTRA_VARS := refspec=$(refspec)
+
+ifneq ($(vers),)
+	EXTRA_VARS += version=$(vers)
+endif
 
 prep.dirs:
 	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml
@@ -23,10 +28,8 @@ test.rpms.centos9:
 	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
 
 
-vers = 40
-
 rpms.fedora:
-	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --extra-vars "version=$(vers) refspec=$(refspec)"
+	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --extra-vars "$(EXTRA_VARS)"
 
 test.rpms.fedora:
-	@ansible-playbook --inventory localhost, ./ansible/test.rpms.fedora.yml --extra-vars "version=$(vers) refspec=$(refspec)"
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.fedora.yml --extra-vars "$(EXTRA_VARS)"

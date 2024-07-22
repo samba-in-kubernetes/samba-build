@@ -1,2 +1,2 @@
-- name: build fedora {{ version }} rpms
-  command: /usr/bin/mock --root {{ mock_dir }}/fedora-{{ version }}-x86_64.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/fedora/{{ version }}/x86_64 --rebuild {{ srpm_dir }}/{{ samba_srpm }}
+- name: build fedora {{ os_vers }} rpms
+  command: /usr/bin/mock --root {{ mock_dir }}/fedora-{{ os_vers }}-x86_64.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/fedora/{{ os_vers }}/x86_64 --rebuild {{ srpm_dir }}/{{ samba_srpm }}

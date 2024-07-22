@@ -3,7 +3,7 @@
   become: no
   vars:
     refspec: "{{ refspec }}"
-    version: "{{ version }}"
+    os_vers: "{{ version | default('40') }}"
   vars_files:
     - vars.yml
   roles:

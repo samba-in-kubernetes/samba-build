@@ -18,6 +18,9 @@ srpm:
 rpms.centos:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.centos.yml --extra-vars "$(EXTRA_VARS)"
 
+test.rpms.centos:
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos.yml --extra-vars "$(EXTRA_VARS)"
+
 test.rpms.centos8:
 	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
 

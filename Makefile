@@ -21,12 +21,6 @@ rpms.centos:
 test.rpms.centos:
 	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos.yml --extra-vars "$(EXTRA_VARS)"
 
-test.rpms.centos8:
-	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos8.yml --extra-vars "refspec=$(refspec)"
-
-test.rpms.centos9:
-	@ansible-playbook --inventory localhost, ./ansible/test.rpms.centos9.yml --extra-vars "refspec=$(refspec)"
-
 
 rpms.fedora:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --extra-vars "$(EXTRA_VARS)"

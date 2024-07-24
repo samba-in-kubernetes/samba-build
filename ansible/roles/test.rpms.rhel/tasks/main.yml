@@ -1,0 +1,18 @@
+---
+- name: Test installation of built rhel {{ os_vers }} rpms in a container
+  containers.podman.podman_container:
+    name: "rhel_samba_build_test"
+    image: "registry.access.redhat.com/ubi{{ os_vers }}"
+    privileged: true
+    command: /tmp/files/rpm-install.sh
+    detach: false
+    rm: true
+    volume:
+      - "{{ role_path }}/files/:/tmp/files/:z"
+      - "{{ rpms_dir }}:/tmp/testbuild/:z"
+    env:
+      OS_VERS: "{{ os_vers }}"
+      SAMBA_VERS: "{{ samba_major_version }}"
+      ORG_ID: "{{ lookup('env', 'ORG_ID') }}"
+      ACT_KEY: "{{ lookup('env', 'ACT_KEY') }}"
+      CEPH_RELEASE_RPM_BASE_URL: "{{ lookup('vars', 'ceph_el' ~ os_vers ~ '_repo_base_url') }}"

@@ -1,8 +1,13 @@
 - name: adapt mock config to use additional template for glusterfs
   lineinfile:
-    path: "{{ mock_dir }}/centos-stream+epel-next-{{ item }}-x86_64.cfg"
+    path: "{{ mock_config }}"
     insertafter: EOF
     line: "include('{{ mock_dir }}/glusterfs-nightly-repo.tpl')"
+  with_items:
+    - "{{ mock_dir }}/centos-stream+epel-next-{{ item }}-x86_64.cfg"
+    - "{{ mock_dir }}/rhel-{{ item }}-x86_64.cfg"
+  loop_control:
+    loop_var: mock_config
 
 - name: adapt mock config to use additional template for ceph
   block:
@@ -20,6 +25,17 @@
 
     - name: add to mock config
       lineinfile:
-        path: "{{ mock_dir }}/centos-stream+epel-next-{{ item }}-x86_64.cfg"
+        path: "{{ mock_config }}"
         insertafter: EOF
         line: "include('{{ mock_dir }}/ceph-el{{ item }}-dev-repo.tpl')"
+      with_items:
+        - "{{ mock_dir }}/centos-stream+epel-next-{{ item }}-x86_64.cfg"
+        - "{{ mock_dir }}/rhel-{{ item }}-x86_64.cfg"
+      loop_control:
+        loop_var: mock_config
+
+- name: adapt mock config to use limited packages from epel for rhel
+  lineinfile:
+    path: "{{ mock_dir }}/rhel-{{ item }}-x86_64.cfg"
+    insertafter:  EOF
+    line: "include('{{ mock_dir }}/epel-restricted.tpl')"

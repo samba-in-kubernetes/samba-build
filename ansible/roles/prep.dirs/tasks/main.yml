@@ -35,9 +35,12 @@
   loop:
     - /etc/mock/centos-stream+epel-next-8-x86_64.cfg
     - /etc/mock/centos-stream+epel-next-9-x86_64.cfg
+    - /etc/mock/rhel-8-x86_64.cfg
+    - /etc/mock/rhel-9-x86_64.cfg
     - glusterfs-nightly-repo.tpl
     - ceph-el8-dev-repo.tpl.j2
     - ceph-el9-dev-repo.tpl.j2
+    - epel-restricted.tpl
 
 - name: copy fedora mock config files
   copy:

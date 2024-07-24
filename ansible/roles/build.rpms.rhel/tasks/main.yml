@@ -1,0 +1,26 @@
+---
+- name: Build rhel {{ os_vers }} rpms locally
+  when: org_id is undefined or act_key is undefined
+  command: /usr/bin/mock --root {{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/rhel/{{ os_vers }}/x86_64 --rebuild {{ srpm_dir }}/{{ samba_srpm }}
+
+- name: Build rhel {{ os_vers }} rpms in a container
+  when: org_id is defined and act_key is defined
+  containers.podman.podman_container:
+    name: "rhel_samba_build"
+    image: "registry.access.redhat.com/ubi{{ os_vers }}"
+    privileged: true
+    command: /tmp/files/rpm-build.sh
+    detach: false
+    rm: true
+    volume:
+      - "{{ role_path }}/files:/tmp/files:z"
+      - "{{ build_dir }}:{{ build_dir }}:z"
+    env:
+      ORG_ID: "{{ org_id }}"
+      ACT_KEY: "{{ act_key }}"
+      OS_VERS: "{{ os_vers }}"
+      MOCK_DIR: "{{ mock_dir }}"
+      SRPM_DIR: "{{ srpm_dir }}"
+      RPMS_DIR: "{{ rpms_dir }}"
+      SAMBA_SRPM: "{{ samba_srpm }}"
+      SAMBA_VERS: "{{ samba_major_version }}"

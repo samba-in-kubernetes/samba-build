@@ -50,11 +50,11 @@
 #endifarch
 %endif
 
-%ifarch aarch64 ppc64le s390x x86_64
-%bcond_without vfs_glusterfs
-%else
 %bcond_with vfs_glusterfs
-#endifarch
+%ifarch aarch64 ppc64le s390x x86_64
+%if (0%{?rhel} && 0%{?centos}) || 0%{?fedora}
+%bcond_without vfs_glusterfs
+%endif
 %endif
 
 # Build the ctdb-pcp-pmda package by default on Fedora

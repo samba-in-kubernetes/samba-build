@@ -25,6 +25,9 @@ test.rpms.centos:
 rpms.rhel:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.rhel.yml --extra-vars "$(EXTRA_VARS)"
 
+test.rpms.rhel:
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.rhel.yml --extra-vars "$(EXTRA_VARS)"
+
 
 rpms.fedora:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --extra-vars "$(EXTRA_VARS)"

@@ -13,8 +13,8 @@
 %{!?_make_verbose:%define _make_verbose V=1 VERBOSE=1}
 
 # Build with Active Directory Domain Controller support by default on Fedora and
-# RHEL >= 9
-%if 0%{?rhel} >= 9 || 0%{?fedora} >= 38
+# CentOS
+%if (0%{?rhel} >= 9 && 0%{?centos}) || 0%{?fedora} >= 38
 %bcond_without dc
 %else
 %bcond_with dc

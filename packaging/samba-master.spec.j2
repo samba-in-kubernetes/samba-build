@@ -1700,6 +1700,7 @@ fi
 
 %if %{without vfs_cephfs}
 %exclude %{_mandir}/man8/vfs_ceph.8*
+%exclude %{_mandir}/man8/vfs_ceph_new.8*
 %exclude %{_mandir}/man8/vfs_ceph_snapshots.8*
 %endif
 
@@ -2233,6 +2234,7 @@ fi
 %{_libdir}/samba/vfs/ceph.so
 %{_libdir}/samba/vfs/ceph_new.so
 %{_mandir}/man8/vfs_ceph.8*
+%{_mandir}/man8/vfs_ceph_new.8*
 %endif
 
 ### VFS-IOURING

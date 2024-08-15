@@ -13,7 +13,7 @@ RPMs for CentOS Stream 8/9, RHEL and Fedora from the upstream  [code repository]
 In order to allow building from a variety of git refspecs, the following make
 target format is used:
 
-`$ make < rpms.centos | rpms.fedora | rpms.rhel > [ vers=< os-version > refspec=< branch-name | tag-name | h:<git-commit-hash> > ]`
+`$ make < rpms.centos | rpms.fedora | rpms.rhel > [ vers=< os-version > refspec=< branch-name | tag-name | h:<git-commit-hash> > git_repo_url=< git_repo_url > ]`
 
 A Few examples:
 
@@ -21,6 +21,7 @@ A Few examples:
 $ make rpms.centos refspec=v4-20-test
 $ make rpms.fedora vers=39 refspec=samba-4.19.6
 $ make rpms.rhel refspec=h:a0862d6d6de
+$ make rpms.rhel refspec=release-8.0 git_repo_url=https://github.com/ibmstorage/samba.git
 ```
 
 As of now, versions  4.19 and  4.20 and the master branch are supported. In the

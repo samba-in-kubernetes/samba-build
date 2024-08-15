@@ -3,7 +3,7 @@
 
 - name: clone samba repository
   git:
-    repo: 'https://git.samba.org/samba.git'
+    repo: '{{ git_repo_url }}'
     version: "{{ chk_out }}"
     dest: "{{ code_dir }}"
     force: yes

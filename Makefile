@@ -5,6 +5,10 @@ ifneq ($(vers),)
 	EXTRA_VARS += version=$(vers)
 endif
 
+ifneq ($(git_repo_url),)
+	EXTRA_VARS += git_repo_url=$(git_repo_url)
+endif
+
 prep.dirs:
 	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml
 

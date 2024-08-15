@@ -13,10 +13,10 @@ prep.dirs:
 	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml
 
 tarball:
-	@ansible-playbook --inventory localhost, ./ansible/make.tarball.yml --extra-vars "refspec=$(refspec)"
+	@ansible-playbook --inventory localhost, ./ansible/make.tarball.yml --extra-vars "$(EXTRA_VARS)"
 
 srpm:
-	@ansible-playbook --inventory localhost, ./ansible/build.srpm.yml --extra-vars "refspec=$(refspec)"
+	@ansible-playbook --inventory localhost, ./ansible/build.srpm.yml --extra-vars "$(EXTRA_VARS)"
 
 
 rpms.centos:

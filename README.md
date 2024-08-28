@@ -13,7 +13,7 @@ RPMs for CentOS Stream 8/9, RHEL and Fedora from the upstream  [code repository]
 In order to allow building from a variety of git refspecs, the following make
 target format is used:
 
-`$ make < rpms.centos | rpms.fedora | rpms.rhel > [ vers=< os-version > refspec=< branch-name | tag-name | h:<git-commit-hash> > git_repo_url=< git_repo_url > ]`
+`$ make < rpms.centos | rpms.fedora | rpms.rhel > [ vers=< os-version > refspec=< branch-name | tag-name | h:<git-commit-hash> > git_repo_url=< git_repo_url > ceph_repo_base_url=< ceph_repo_base_url > ceph_repo_gpgkey=< ceph_repo_gpgkey > ]`
 
 A Few examples:
 
@@ -22,6 +22,7 @@ $ make rpms.centos refspec=v4-20-test
 $ make rpms.fedora vers=39 refspec=samba-4.19.6
 $ make rpms.rhel refspec=h:a0862d6d6de
 $ make rpms.rhel refspec=release-8.0 git_repo_url=https://github.com/ibmstorage/samba.git
+$ make rpms.centos refspec=v4-20-test ceph_repo_base_url=https://download.ceph.com/rpm-squid/el9/ ceph_repo_gpgkey=https://download.ceph.com/keys/release.asc
 ```
 
 As of now, versions  4.19 and  4.20 and the master branch are supported. In the
@@ -47,3 +48,11 @@ mandatorily required RHEL repositories(BaseOS, AppStream and CodeReadyBuilder)
 variables to perform the build operation via podman containers where `ORG_ID` is
 the organizational ID and `ACT_KEY` is the activation key name used for
 registration purposes within container.
+
+### Ceph repo usage
+The latest Ceph dev build for the main branch is used by default. We find this build by querying
+shaman.ceph.com.
+
+If the *ceph_repo_base_url* variable is provided, the Ceph repo will be created with that value
+as the baseurl in the repo instead. Optionally, *ceph_repo_gpgkey* can be given to support
+gpg signed releases.

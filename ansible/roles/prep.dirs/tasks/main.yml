@@ -38,8 +38,7 @@
     - /etc/mock/rhel-8-x86_64.cfg
     - /etc/mock/rhel-9-x86_64.cfg
     - glusterfs-nightly-repo.tpl
-    - ceph-el8-dev-repo.tpl.j2
-    - ceph-el9-dev-repo.tpl.j2
+    - ceph-repo.tpl.j2
     - epel-restricted.tpl
 
 - name: copy fedora mock config files
@@ -50,6 +49,3 @@
     - "/etc/mock/fedora-*-x86_64.cfg"
 
 - include_tasks: repo.yml
-  with_items:
-    - "8"
-    - "9"

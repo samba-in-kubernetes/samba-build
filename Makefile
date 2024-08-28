@@ -9,6 +9,14 @@ ifneq ($(git_repo_url),)
 	EXTRA_VARS += git_repo_url=$(git_repo_url)
 endif
 
+ifneq ($(ceph_repo_base_url),)
+	EXTRA_VARS += ceph_repo_base_url=$(ceph_repo_base_url)
+endif
+
+ifneq ($(ceph_repo_gpgkey),)
+	EXTRA_VARS += ceph_repo_gpgkey=$(ceph_repo_gpgkey)
+endif
+
 prep.dirs:
 	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml
 

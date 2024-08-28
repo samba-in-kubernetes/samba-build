@@ -4,38 +4,40 @@
     insertafter: EOF
     line: "include('{{ mock_dir }}/glusterfs-nightly-repo.tpl')"
   with_items:
-    - "{{ mock_dir }}/centos-stream+epel-next-{{ item }}-x86_64.cfg"
-    - "{{ mock_dir }}/rhel-{{ item }}-x86_64.cfg"
+    - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-x86_64.cfg"
+    - "{{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg"
   loop_control:
     loop_var: mock_config
 
 - name: adapt mock config to use additional template for ceph
   block:
-    - name: determine ceph repo base url
-      shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros=centos/{{ item }}/x86_64&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
-      register: get_ceph_repo_url
+    - block:
+      - name: determine ceph repo base url
+        shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros=centos/{{ os_vers }}/x86_64&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
+        register: get_ceph_repo_url
 
-    - set_fact:
-        "ceph_el{{ item }}_repo_base_url": "{{ get_ceph_repo_url.stdout }}"
+      - set_fact:
+          "ceph_repo_base_url": "{{ get_ceph_repo_url.stdout }}"
+      when: ceph_repo_base_url is not defined
 
     - name: substitute and create ceph repo template
       template:
-        src: "{{ mock_dir }}/ceph-el{{ item }}-dev-repo.tpl.j2"
-        dest: "{{ mock_dir }}/ceph-el{{ item }}-dev-repo.tpl"
+        src: "{{ mock_dir }}/ceph-repo.tpl.j2"
+        dest: "{{ mock_dir }}/ceph-repo.tpl"
 
     - name: add to mock config
       lineinfile:
         path: "{{ mock_config }}"
         insertafter: EOF
-        line: "include('{{ mock_dir }}/ceph-el{{ item }}-dev-repo.tpl')"
+        line: "include('{{ mock_dir }}/ceph-repo.tpl')"
       with_items:
-        - "{{ mock_dir }}/centos-stream+epel-next-{{ item }}-x86_64.cfg"
-        - "{{ mock_dir }}/rhel-{{ item }}-x86_64.cfg"
+        - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-x86_64.cfg"
+        - "{{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg"
       loop_control:
         loop_var: mock_config
 
 - name: adapt mock config to use limited packages from epel for rhel
   lineinfile:
-    path: "{{ mock_dir }}/rhel-{{ item }}-x86_64.cfg"
+    path: "{{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg"
     insertafter:  EOF
     line: "include('{{ mock_dir }}/epel-restricted.tpl')"

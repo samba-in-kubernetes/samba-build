@@ -808,13 +808,6 @@ Provides: bundled(libreplace)
 The python3-%{name} package contains the Python 3 libraries needed by programs
 that use SMB, RPC and other Samba provided protocols in Python 3 programs.
 
-%package -n python3-%{name}-devel
-Summary: Samba python devel files
-Requires: python3-%{name} = %{samba_depver}
-
-%description -n python3-%{name}-devel
-The python3-%{name}-devel package contains the Python 3 devel files.
-
 %package -n python3-samba-test
 Summary: Samba Python libraries
 Requires: python3-%{name} = %{samba_depver}
@@ -2491,7 +2484,6 @@ fi
 %{python3_sitearch}/_ldb_text.py*
 %{python3_sitearch}/ldb.*.so
 
-%files -n python3-%{name}-devel
 %if %{with dc} || %{with testsuite}
 %files -n python3-%{name}-dc
 %{python3_sitearch}/samba/samdb.py

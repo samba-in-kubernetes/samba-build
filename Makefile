@@ -45,4 +45,4 @@ rpms.fedora:
 	@ansible-playbook --inventory localhost, ./ansible/build.rpms.fedora.yml --skip-tags repos --extra-vars "$(EXTRA_VARS)"
 
 test.rpms.fedora:
-	@ansible-playbook --inventory localhost, ./ansible/test.rpms.fedora.yml ---skip-tags repos -extra-vars "$(EXTRA_VARS)"
+	@ansible-playbook --inventory localhost, ./ansible/test.rpms.fedora.yml --skip-tags repos --extra-vars "$(EXTRA_VARS)"

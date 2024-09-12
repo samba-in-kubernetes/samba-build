@@ -15,4 +15,4 @@
       SAMBA_VERS: "{{ samba_major_version }}"
       ORG_ID: "{{ lookup('env', 'ORG_ID') }}"
       ACT_KEY: "{{ lookup('env', 'ACT_KEY') }}"
-      CEPH_RELEASE_RPM_BASE_URL: "{{ lookup('vars', 'ceph_el' ~ os_vers ~ '_repo_base_url') }}"
+      CEPH_RELEASE_RPM_BASE_URL: "{{ lookup('vars', 'ceph_repo_base_url') }}"

@@ -12,4 +12,4 @@
     env:
       OS_VERS: "{{ os_vers }}"
       SAMBA_VERS: "{{ samba_major_version }}"
-      CEPH_RELEASE_RPM_BASE_URL: "{{ lookup('vars', 'ceph_el' ~ os_vers ~ '_repo_base_url') }}"
+      CEPH_RELEASE_RPM_BASE_URL: "{{ lookup('vars', 'ceph_repo_base_url') }}"

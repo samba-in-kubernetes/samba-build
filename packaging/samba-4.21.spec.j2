@@ -209,9 +209,7 @@ BuildRequires: libcmocka-devel
 BuildRequires: libtirpc-devel
 BuildRequires: libuuid-devel
 BuildRequires: libxslt
-%if %{with dc} || %{with testsuite}
 BuildRequires: lmdb
-%endif
 %if %{with winexe}
 BuildRequires: mingw32-gcc
 BuildRequires: mingw64-gcc
@@ -1897,9 +1895,7 @@ fi
 
 %{_libdir}/samba/ldb/asq.so
 %{_libdir}/samba/ldb/ldb.so
-%if %{with dc} || %{with testsuite}
 %{_libdir}/samba/ldb/mdb.so
-%endif
 %{_libdir}/samba/ldb/paged_searches.so
 %{_libdir}/samba/ldb/rdn_name.so
 %{_libdir}/samba/ldb/sample.so

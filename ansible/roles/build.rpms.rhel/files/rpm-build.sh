@@ -8,6 +8,6 @@ dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-${OS_VE
 
 dnf -y install mock rpm-build
 
-mock --root "${MOCK_DIR}/rhel-${OS_VERS}-x86_64.cfg" --resultdir "${RPMS_DIR}/${SAMBA_VERS}/rhel/${OS_VERS}/x86_64" --rebuild "${SRPM_DIR}/${SAMBA_SRPM}"
+mock --root "${MOCK_DIR}/rhel-${OS_VERS}-${OS_ARCH}.cfg" --resultdir "${RPMS_DIR}/${SAMBA_VERS}/rhel/${OS_VERS}/${OS_ARCH}" --rebuild "${SRPM_DIR}/${SAMBA_SRPM}"
 
 subscription-manager unregister

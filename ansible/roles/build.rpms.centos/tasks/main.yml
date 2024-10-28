@@ -1,2 +1,2 @@
 - name: build centos {{ os_vers }} rpms
-  command: /usr/bin/mock --root {{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-x86_64.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/centos/{{ os_vers }}/x86_64 --rebuild {{ srpm_dir }}/{{ samba_srpm }}
+  command: /usr/bin/mock --root {{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-{{ os_arch }}.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/centos/{{ os_vers }}/{{ os_arch }} --rebuild {{ srpm_dir }}/{{ samba_srpm }}

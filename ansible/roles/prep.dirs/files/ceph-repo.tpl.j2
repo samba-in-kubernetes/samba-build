@@ -2,7 +2,7 @@ config_opts['yum.conf'] += """
 
 [ceph-repo]
 name = Ceph builds
-baseurl={{ ceph_repo_base_url }}/x86_64
+baseurl={{ ceph_repo_base_url }}/{{ os_arch }}
 enabled = 1
 {% if ceph_repo_gpgkey is defined %}
 gpgcheck = 1

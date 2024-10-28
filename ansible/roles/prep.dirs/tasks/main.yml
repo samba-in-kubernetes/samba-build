@@ -33,10 +33,10 @@
     src: "{{ item }}"
     dest: "{{ mock_dir }}"
   loop:
-    - /etc/mock/centos-stream+epel-next-8-x86_64.cfg
-    - /etc/mock/centos-stream+epel-next-9-x86_64.cfg
-    - /etc/mock/rhel-8-x86_64.cfg
-    - /etc/mock/rhel-9-x86_64.cfg
+    - /etc/mock/centos-stream+epel-next-8-{{ os_arch }}.cfg
+    - /etc/mock/centos-stream+epel-next-9-{{ os_arch }}.cfg
+    - /etc/mock/rhel-8-{{ os_arch }}.cfg
+    - /etc/mock/rhel-9-{{ os_arch }}.cfg
     - glusterfs-nightly-repo.tpl
     - ceph-repo.tpl.j2
     - epel-restricted.tpl
@@ -46,7 +46,7 @@
     src: "{{ item }}"
     dest: "{{ mock_dir }}"
   with_fileglob:
-    - "/etc/mock/fedora-*-x86_64.cfg"
+    - "/etc/mock/fedora-*-{{ os_arch }}.cfg"
 
 - include_tasks: repo.yml
   tags: repos

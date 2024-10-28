@@ -4,6 +4,7 @@
   vars:
     refspec: "{{ refspec }}"
     os_vers: "{{ version | default('9') }}"
+    os_arch: "{{ arch | default('x86_64') }}"
     org_id: "{{ lookup('env', 'ORG_ID', default=Undefined) }}"
     act_key: "{{ lookup('env', 'ACT_KEY', default=Undefined) }}"
   vars_files:

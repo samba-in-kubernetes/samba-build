@@ -4,8 +4,8 @@
     insertafter: EOF
     line: "include('{{ mock_dir }}/glusterfs-nightly-repo.tpl')"
   with_items:
-    - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-x86_64.cfg"
-    - "{{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg"
+    - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-{{ os_arch }}.cfg"
+    - "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
   loop_control:
     loop_var: mock_config
 
@@ -31,13 +31,13 @@
         insertafter: EOF
         line: "include('{{ mock_dir }}/ceph-repo.tpl')"
       with_items:
-        - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-x86_64.cfg"
-        - "{{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg"
+        - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-{{ os_arch }}.cfg"
+        - "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
       loop_control:
         loop_var: mock_config
 
 - name: adapt mock config to use limited packages from epel for rhel
   lineinfile:
-    path: "{{ mock_dir }}/rhel-{{ os_vers }}-x86_64.cfg"
+    path: "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
     insertafter:  EOF
     line: "include('{{ mock_dir }}/epel-restricted.tpl')"

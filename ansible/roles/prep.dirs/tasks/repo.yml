@@ -8,17 +8,20 @@
     - "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
   loop_control:
     loop_var: mock_config
+  when: os_arch == 'x86_64'
 
 - name: adapt mock config to use additional template for ceph
   block:
     - block:
       - name: determine ceph repo base url
-        shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros=centos/{{ os_vers }}/x86_64&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
+        shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros=centos/{{ os_vers }}/{{ ceph_arch }}&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
         register: get_ceph_repo_url
 
       - set_fact:
           "ceph_repo_base_url": "{{ get_ceph_repo_url.stdout }}"
       when: ceph_repo_base_url is not defined
+      vars:
+        ceph_arch: "{{ 'arm64' if os_arch == 'aarch64' else os_arch }}"
 
     - name: substitute and create ceph repo template
       template:

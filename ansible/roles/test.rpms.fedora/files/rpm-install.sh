@@ -34,7 +34,11 @@ test_build_vers=$(dnf repoquery -q --disablerepo='*' \
 			--arch ${os_arch} --qf '%{version}-%{release}' samba)
 
 pkgs=(samba-${test_build_vers} samba-test-${test_build_vers} \
-	samba-vfs-glusterfs-${test_build_vers} samba-vfs-cephfs-${test_build_vers})
+	samba-vfs-cephfs-${test_build_vers})
+
+if [ "${os_arch}" == "x86_64" ]; then
+	pkgs+=(samba-vfs-glusterfs-${test_build_vers})
+fi
 
 if [ "${os_version}" -ge 38 ]; then
 	pkgs+=(samba-dc-${test_build_vers})

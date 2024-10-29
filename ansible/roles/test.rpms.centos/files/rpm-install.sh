@@ -3,8 +3,9 @@
 set -ex
 
 os_version=${OS_VERS:-"8"}
+os_arch=${OS_ARCH:-"x86_64"}
 samba_version=${SAMBA_VERS:-"master"}
-rpms_dir="/tmp/testbuild/${samba_version}/centos/${os_version}/x86_64"
+rpms_dir="/tmp/testbuild/${samba_version}/centos/${os_version}/${os_arch}"
 
 dnf -y update --refresh
 
@@ -36,7 +37,7 @@ dnf -y install --nogpgcheck \
 
 test_build_vers=$(dnf repoquery -q --disablerepo='*' \
 			--enablerepo=samba-${samba_version}-test-rpms \
-			--arch x86_64 --qf '%{version}-%{release}' samba)
+			--arch ${os_arch} --qf '%{version}-%{release}' samba)
 
 dnf_args=()
 

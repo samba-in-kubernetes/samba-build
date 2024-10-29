@@ -11,4 +11,5 @@
       - "{{ rpms_dir }}:/tmp/testbuild/:z"
     env:
       OS_VERS: "{{ os_vers }}"
+      OS_ARCH: "{{ os_arch }}"
       SAMBA_VERS: "{{ samba_major_version }}"

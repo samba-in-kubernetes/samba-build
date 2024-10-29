@@ -29,9 +29,6 @@ EOF
 
 dnf -y install dnf-plugins-core
 
-dnf config-manager \
-	--add-repo http://artifacts.ci.centos.org/gluster/nightly/master.repo
-
 dnf -y install --nogpgcheck \
 	${CEPH_RELEASE_RPM_BASE_URL}/noarch/ceph-release-1-0.el${os_version}.noarch.rpm
 
@@ -42,7 +39,13 @@ test_build_vers=$(dnf repoquery -q --disablerepo='*' \
 dnf_args=()
 
 pkgs=(samba-${test_build_vers} samba-test-${test_build_vers} \
-	samba-vfs-glusterfs-${test_build_vers} samba-vfs-cephfs-${test_build_vers})
+	samba-vfs-cephfs-${test_build_vers})
+
+if [ "${os_arch}" == "x86_64" ]; then
+	dnf config-manager \
+		--add-repo http://artifacts.ci.centos.org/gluster/nightly/master.repo
+	pkgs+=(samba-vfs-glusterfs-${test_build_vers})
+fi
 
 if [ "${os_version}" == "9" ]; then
 	dnf_args+=(--enablerepo=crb)

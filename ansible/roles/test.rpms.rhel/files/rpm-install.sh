@@ -3,8 +3,9 @@
 set -e
 
 os_version=${OS_VERS:-"8"}
+os_arch=${OS_ARCH:-"x86_64"}
 samba_version=${SAMBA_VERS:-"master"}
-rpms_dir="/tmp/testbuild/${samba_version}/rhel/${os_version}/x86_64"
+rpms_dir="/tmp/testbuild/${samba_version}/rhel/${os_version}/${os_arch}"
 
 subscription-manager register --org "${ORG_ID}" --activationkey "${ACT_KEY}"
 
@@ -31,7 +32,7 @@ dnf -y install --nogpgcheck \
 
 test_build_vers=$(dnf repoquery -q --disablerepo='*' \
 			--enablerepo=samba-${samba_version}-test-rpms \
-			--arch x86_64 --qf '%{version}-%{release}' samba)
+			--arch ${os_arch} --qf '%{version}-%{release}' samba)
 
 dnf -y --setopt epel.includepkgs=thrift install samba-${test_build_vers} \
 	samba-test-${test_build_vers} samba-vfs-cephfs-${test_build_vers}

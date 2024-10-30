@@ -1,35 +1,50 @@
 # Samba CentOS/Fedora RPM Builds
 
-[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-master&subject=master / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-master/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-v4-19-test&subject=v4-19-test / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-v4-19-test/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-v4-20-test&subject=v4-20-test / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-v4-20-test/)
+## x86_64
 
-[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-master&subject=master / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-master/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-v4-19-test&subject=v4-19-test / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-v4-19-test/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-v4-20-test&subject=v4-20-test / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-v4-20-test/)
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-master-x86_64&subject=master / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-master-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-v4-21-test-x86_64&subject=v4-21-test / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-v4-21-test-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-v4-20-test-x86_64&subject=v4-20-test / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-v4-20-test-x86_64/)
 
-[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-master&subject=master / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-master/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-v4-19-test&subject=v4-19-test / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-v4-19-test/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-v4-20-test&subject=v4-20-test / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-v4-20-test/)
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-master-x86_64&subject=master / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-master-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-v4-21-test-x86_64&subject=v4-21-test / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-v4-21-test-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-v4-20-test-x86_64&subject=v4-20-test / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-v4-20-test-x86_64/)
 
-[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-master&subject=master / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-master/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-v4-19-test&subject=v4-19-test / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-v4-19-test/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-v4-20-test&subject=v4-20-test / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-v4-20-test/)
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-master-x86_64&subject=master / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-master-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-v4-21-test-x86_64&subject=v4-21-test / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-v4-21-test-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-v4-20-test-x86_64&subject=v4-20-test / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-v4-20-test-x86_64/)
+
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-master-x86_64&subject=master / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-master-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-v4-21-test-x86_64&subject=v4-21-test / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-v4-21-test-x86_64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-v4-20-test-x86_64&subject=v4-20-test / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-v4-20-test-x86_64/)
+
+## aarch64
+
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-master-aarch64&subject=master / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-master-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-v4-21-test-aarch64&subject=v4-21-test / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-v4-21-test-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora39-v4-20-test-aarch64&subject=v4-20-test / Fedora 39>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora39-v4-20-test-aarch64/)
+
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-master-aarch64&subject=master / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-master-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-v4-21-test-aarch64&subject=v4-21-test / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-v4-21-test-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-fedora40-v4-20-test-aarch64&subject=v4-20-test / Fedora 40>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-fedora40-v4-20-test-aarch64/)
+
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-master-aarch64&subject=master / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-master-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-v4-21-test-aarch64&subject=v4-21-test / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-v4-21-test-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos8-v4-20-test-aarch64&subject=v4-20-test / CentOS 8>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos8-v4-20-test-aarch64/)
+
+[![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-master-aarch64&subject=master / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-master-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-v4-21-test-aarch64&subject=v4-21-test / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-v4-21-test-aarch64/) [![status](<https://jenkins-samba.apps.ocp.cloud.ci.centos.org/buildStatus/icon?job=samba_build-rpms-centos9-v4-20-test-aarch64&subject=v4-20-test / CentOS 9>)](https://jenkins-samba.apps.ocp.cloud.ci.centos.org/job/samba_build-rpms-centos9-v4-20-test-aarch64/)
 
 This repository contains automation to create [Samba](https://www.samba.org/)
 RPMs for CentOS Stream 8/9, RHEL and Fedora from the upstream  [code repository](https://git.samba.org/samba.git).
 In order to allow building from a variety of git refspecs, the following make
 target format is used:
 
-`$ make < rpms.centos | rpms.fedora | rpms.rhel > [ vers=< os-version > refspec=< branch-name | tag-name | h:<git-commit-hash> > git_repo_url=< git_repo_url > ceph_repo_base_url=< ceph_repo_base_url > ceph_repo_gpgkey=< ceph_repo_gpgkey > ]`
+`$ make < rpms.centos | rpms.fedora | rpms.rhel > [ vers=< os-version > arch=< architecture > refspec=< branch-name | tag-name | h:<git-commit-hash> > git_repo_url=< git_repo_url > ceph_repo_base_url=< ceph_repo_base_url > ceph_repo_gpgkey=< ceph_repo_gpgkey > ]`
 
 A Few examples:
 
 ```console
 $ make rpms.centos refspec=v4-20-test
 $ make rpms.fedora vers=39 refspec=samba-4.19.6
+$ make rpms.centos arch=aarch64 refspec=v4-21-test
 $ make rpms.rhel refspec=h:a0862d6d6de
 $ make rpms.rhel refspec=release-8.0 git_repo_url=https://github.com/ibmstorage/samba.git
 $ make rpms.centos refspec=v4-20-test ceph_repo_base_url=https://download.ceph.com/rpm-squid/el9/ ceph_repo_gpgkey=https://download.ceph.com/keys/release.asc
 ```
 
-As of now, versions  4.19 and  4.20 and the master branch are supported. In the
+As of now, versions  4.20 and  4.21 and the master branch are supported. In the
 absence of the *refspec* argument the master branch is built by default. The
 above format is also applicable for other `make` targets. In the absence of
 *vers* argument *9* and *40* will be the default for RHEL/CentOS and Fedora
-respectively.
+respectively. All build targets defaults to *x86_64* architecture unless *arch*
+argument is used. Currently in addition to *x86_64* we support building for
+*aarch64*.
 
 Except on CentOS Stream 8 and RHEL, in addition to vfs-glusterfs and vfs-cephfs,
 Active Directory Domain Controller components are also built as RPMs.
@@ -56,3 +71,9 @@ shaman.ceph.com.
 If the *ceph_repo_base_url* variable is provided, the Ceph repo will be created with that value
 as the baseurl in the repo instead. Optionally, *ceph_repo_gpgkey* can be given to support
 gpg signed releases.
+
+### Building for aarch64
+Unless you are on an aarch64 host, the build process is expected to be absurdly
+slow due to the whole emulation logic. With Fedora, *qemu-aarch64-static* binary
+provided by `qemu-user-static-aarch64` package is the key for successfully
+building aarch64 RPMs from a non-aarch64 host.

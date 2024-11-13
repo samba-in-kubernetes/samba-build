@@ -71,8 +71,6 @@
 %bcond_with etcd_mutex
 %endif
 
-%define samba_requires_eq()  %(LC_ALL="C" echo '%*' | xargs -r rpm -q --qf 'Requires: %%{name} = %%{epoch}:%%{version}\\n' | sed -e 's/ (none):/ /' -e 's/ 0:/ /' | grep -v "is not")
-
 %global baserelease 1
 
 %global samba_version {{ samba_rpm_version }}
@@ -502,11 +500,6 @@ Requires: libwbclient = %{samba_depver}
 %endif
 Requires: ldb-tools
 Requires: python3-setproctitle
-# Force using libldb version to be the same as build version
-# Otherwise LDB modules will not be loaded and samba-tool will fail
-# See bug 1507420
-%samba_requires_eq libldb
-
 Requires: python3-%{name} = %{samba_depver}
 Requires: python3-%{name}-dc = %{samba_depver}
 Requires: krb5-server >= %{required_mit_krb5}

@@ -71,6 +71,8 @@
 %bcond_with etcd_mutex
 %endif
 
+%bcond_without gettext
+
 %global baserelease 1
 
 %global samba_version {{ samba_rpm_version }}
@@ -188,6 +190,9 @@ BuildRequires: docbook-style-xsl
 BuildRequires: e2fsprogs-devel
 BuildRequires: flex
 BuildRequires: gawk
+%if %{with gettext}
+BuildRequires: gettext
+%endif
 BuildRequires: gnupg2
 %if 0%{?centos} == 7
 BuildRequires: compat-gnutls37-devel
@@ -1200,6 +1205,9 @@ export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
 %if %{with etcd_mutex}
         --enable-etcd-reclock \
 %endif
+%if %{without gettext}
+        --without-gettext \
+%endif
         --with-profiling-data \
         --with-systemd \
         --with-quotas \
@@ -1220,6 +1228,8 @@ popd
 
 %install
 %make_install
+%find_lang pam_winbind
+%find_lang net
 
 install -d -m 0755 %{buildroot}/usr/{sbin,bin}
 install -d -m 0755 %{buildroot}%{_libdir}/security
@@ -1926,7 +1936,11 @@ fi
 %{_libdir}/samba/pdb/smbpasswd.so
 %{_libdir}/samba/pdb/tdbsam.so
 
+%if %{with gettext}
+%files common-tools -f net.lang
+%else
 %files common-tools
+%endif
 %{_bindir}/net
 %{_bindir}/pdbedit
 %{_bindir}/profiles
@@ -2642,7 +2656,11 @@ fi
 %{_mandir}/man8/winbind_krb5_locator.8*
 
 ### WINBIND-MODULES
+%if %{with gettext}
+%files winbind-modules -f pam_winbind.lang
+%else
 %files winbind-modules
+%endif
 %{_libdir}/libnss_winbind.so*
 %{_libdir}/libnss_wins.so*
 %{_libdir}/security/pam_winbind.so

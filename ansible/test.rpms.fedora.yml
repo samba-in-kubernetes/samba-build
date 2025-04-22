@@ -4,7 +4,7 @@
   become: no
   vars:
     refspec: "{{ refspec }}"
-    os_vers: "{{ version | default('41') }}"
+    os_vers: "{{ version | default('42') }}"
     os_arch: "{{ arch | default('x86_64') }}"
   vars_files:
     - vars.yml

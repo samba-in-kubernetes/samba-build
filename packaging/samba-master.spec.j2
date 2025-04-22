@@ -73,6 +73,8 @@
 
 %bcond_without gettext
 
+%bcond_without prometheus_endpoint
+
 %global baserelease 1
 
 %global samba_version {{ samba_rpm_version }}
@@ -207,6 +209,9 @@ BuildRequires: libaio-devel
 BuildRequires: libarchive-devel
 BuildRequires: libattr-devel
 BuildRequires: libcap-devel
+%if %{with prometheus_endpoint}
+BuildRequires: libevent-devel
+%endif
 BuildRequires: libicu-devel
 BuildRequires: libcmocka-devel
 BuildRequires: libtirpc-devel
@@ -1208,6 +1213,9 @@ export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
 %if %{without gettext}
         --without-gettext \
 %endif
+%if %{with prometheus_endpoint}
+        --with-prometheus-exporter \
+%endif
         --with-profiling-data \
         --with-systemd \
         --with-quotas \
@@ -1698,6 +1706,10 @@ fi
 %exclude %{_mandir}/man8/vfs_ceph_snapshots.8*
 %endif
 
+%if %{without prometheus_endpoint}
+%exclude %{_mandir}/man8/smb_prometheus_endpoint.8*
+%endif
+
 %attr(775,root,printadmin) %dir /var/lib/samba/drivers
 
 ### CLIENT
@@ -1725,6 +1737,9 @@ fi
 %{_bindir}/smbspool
 %{_bindir}/smbtar
 %{_bindir}/smbtree
+%if %{with prometheus_endpoint}
+%{_sbindir}/smb_prometheus_endpoint
+%endif
 %{_bindir}/wspsearch
 %dir %{_libexecdir}/samba
 %ghost %{_libexecdir}/samba/cups_backend_smb
@@ -1752,6 +1767,9 @@ fi
 %{_mandir}/man8/cifsdd.8.*
 %{_mandir}/man8/samba-regedit.8*
 %{_mandir}/man8/smbspool.8*
+%if %{with prometheus_endpoint}
+%{_mandir}/man8/smb_prometheus_endpoint.8*
+%endif
 
 %{_bindir}/tdbbackup
 %{_bindir}/tdbdump

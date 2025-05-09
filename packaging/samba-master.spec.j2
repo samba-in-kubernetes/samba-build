@@ -1706,10 +1706,6 @@ fi
 %exclude %{_mandir}/man8/vfs_ceph_snapshots.8*
 %endif
 
-%if %{without prometheus_endpoint}
-%exclude %{_mandir}/man8/smb_prometheus_endpoint.8*
-%endif
-
 %attr(775,root,printadmin) %dir /var/lib/samba/drivers
 
 ### CLIENT

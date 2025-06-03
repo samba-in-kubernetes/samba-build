@@ -1,7 +1,7 @@
 ---
 - name: Build rhel {{ os_vers }} rpms locally
   when: org_id is undefined or act_key is undefined
-  command: /usr/bin/mock --root {{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/rhel/{{ os_vers }}/{{ os_arch }} --rebuild {{ srpm_dir }}/{{ samba_srpm }}
+  command: /usr/bin/mock --root {{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg --resultdir {{ rpms_dir }}/{{ samba_major_version }}/rhel/{{ os_vers }}/{{ os_arch }} --define "vendor_dist {{ vendor_dist }}" --rebuild {{ srpm_dir }}/{{ samba_srpm }}
 
 - name: Build rhel {{ os_vers }} rpms in a container
   when: org_id is defined and act_key is defined
@@ -25,3 +25,4 @@
       RPMS_DIR: "{{ rpms_dir }}"
       SAMBA_SRPM: "{{ samba_srpm }}"
       SAMBA_VERS: "{{ samba_major_version }}"
+      VENDOR_DIST: "{{ vendor_dist }}"

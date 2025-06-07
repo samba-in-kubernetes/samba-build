@@ -1175,6 +1175,7 @@ export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
         --with-lockdir=/var/lib/samba/lock \
         --with-statedir=/var/lib/samba \
         --with-cachedir=/var/lib/samba \
+        --pythonarchdir=%{python3_sitearch} \
         --disable-rpath-install \
         --with-shared-modules=%{_samba_modules} \
         --bundled-libraries=%{_samba_libraries} \

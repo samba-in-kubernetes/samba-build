@@ -1197,6 +1197,9 @@ export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
 %if %{without vfs_glusterfs}
         --disable-glusterfs \
 %endif
+%if %{without vfs_cephfs}
+        --disable-cephfs \
+%endif
 %if %{with clustering}
         --with-cluster-support \
 %endif
@@ -1697,16 +1700,6 @@ fi
 %{_mandir}/man8/vfs_worm.8*
 %{_mandir}/man8/vfs_xattr_tdb.8*
 %{_mandir}/man8/vfs_widelinks.8*
-
-%if %{without vfs_glusterfs}
-%exclude %{_mandir}/man8/vfs_glusterfs.8*
-%endif
-
-%if %{without vfs_cephfs}
-%exclude %{_mandir}/man8/vfs_ceph.8*
-%exclude %{_mandir}/man8/vfs_ceph_new.8*
-%exclude %{_mandir}/man8/vfs_ceph_snapshots.8*
-%endif
 
 %attr(775,root,printadmin) %dir /var/lib/samba/drivers
 

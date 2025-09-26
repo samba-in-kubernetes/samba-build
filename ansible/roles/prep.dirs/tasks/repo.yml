@@ -3,7 +3,7 @@
     path: "{{ mock_config }}"
     insertafter: EOF
     line: "include('{{ mock_dir }}/sig-storage-gluster.tpl')"
-  when: mock_config is defined
+  when: os_vers | int <= 9 and mock_config is defined
 
 - name: adapt mock config to use additional template for ceph
   block:

@@ -9,6 +9,7 @@
     org_id: "{{ lookup('env', 'ORG_ID', default=Undefined) }}"
     act_key: "{{ lookup('env', 'ACT_KEY', default=Undefined) }}"
     vendor_dist: "{{ vendor_dist_suffix | default('%{nil}') }}"
+    mock_config: "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
   vars_files:
     - vars.yml
   roles:

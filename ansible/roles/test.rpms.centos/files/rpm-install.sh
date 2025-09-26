@@ -38,12 +38,14 @@ test_build_vers=$(dnf repoquery -q --disablerepo='*' \
 
 dnf_args=()
 
-pkgs=(samba-${test_build_vers} samba-test-${test_build_vers} \
-	samba-vfs-cephfs-${test_build_vers} samba-vfs-glusterfs-${test_build_vers})
+pkgs=(samba-${test_build_vers} samba-test-${test_build_vers} samba-vfs-cephfs-${test_build_vers})
 
-dnf -y install centos-release-gluster
+if [ "${os_version}" -le 9 ]; then
+	dnf -y install centos-release-gluster
+	pkgs+=(samba-vfs-glusterfs-${test_build_vers})
+fi
 
-if [ "${os_version}" == "9" ]; then
+if [ "${os_version}" -ge 9 ]; then
 	dnf_args+=(--enablerepo=crb)
 	pkgs+=(samba-dc-${test_build_vers})
 fi

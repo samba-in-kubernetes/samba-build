@@ -9,7 +9,7 @@
   block:
     - block:
       - name: determine ceph repo base url
-        shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros=centos/{{ os_vers }}/{{ ceph_arch }}&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
+        shell: curl -s "https://shaman.ceph.com/api/search/?project=ceph&distros={{ distro_name }}/{{ os_vers }}/{{ ceph_arch }}&flavor=default&ref=main&sha1=latest" | jq -r .[0].url
         register: get_ceph_repo_url
 
       - set_fact:
@@ -17,6 +17,7 @@
       when: ceph_repo_base_url is not defined
       vars:
         ceph_arch: "{{ 'arm64' if os_arch == 'aarch64' else os_arch }}"
+        distro_name: "{{ 'centos' if os_vers | int <= 9 else 'rocky' }}"
 
     - name: substitute and create ceph repo template
       template:

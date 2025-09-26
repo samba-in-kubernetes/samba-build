@@ -3,11 +3,7 @@
     path: "{{ mock_config }}"
     insertafter: EOF
     line: "include('{{ mock_dir }}/sig-storage-gluster.tpl')"
-  with_items:
-    - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-{{ os_arch }}.cfg"
-    - "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
-  loop_control:
-    loop_var: mock_config
+  when: mock_config is defined
 
 - name: adapt mock config to use additional template for ceph
   block:
@@ -32,14 +28,11 @@
         path: "{{ mock_config }}"
         insertafter: EOF
         line: "include('{{ mock_dir }}/ceph-repo.tpl')"
-      with_items:
-        - "{{ mock_dir }}/centos-stream+epel-next-{{ os_vers }}-{{ os_arch }}.cfg"
-        - "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
-      loop_control:
-        loop_var: mock_config
+      when: mock_config is defined
 
 - name: adapt mock config to use limited packages from epel for rhel
   lineinfile:
-    path: "{{ mock_dir }}/rhel-{{ os_vers }}-{{ os_arch }}.cfg"
+    path: "{{ mock_config }}"
     insertafter:  EOF
     line: "include('{{ mock_dir }}/epel-restricted.tpl')"
+  when: os == 'rhel' and mock_config is defined

@@ -26,7 +26,7 @@ ifneq ($(vendor_dist_suffix),)
 endif
 
 prep.dirs:
-	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml
+	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml --extra-vars "$(EXTRA_VARS)"
 
 tarball:
 	@ansible-playbook --inventory localhost, ./ansible/make.tarball.yml --extra-vars "$(EXTRA_VARS)"

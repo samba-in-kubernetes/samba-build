@@ -35,8 +35,10 @@
   loop:
     - /etc/mock/centos-stream+epel-next-8-{{ os_arch }}.cfg
     - /etc/mock/centos-stream+epel-next-9-{{ os_arch }}.cfg
+    - /etc/mock/centos-stream+epel-10-{{ os_arch }}.cfg
     - /etc/mock/rhel-8-{{ os_arch }}.cfg
     - /etc/mock/rhel-9-{{ os_arch }}.cfg
+    - /etc/mock/rhel-10-{{ os_arch }}.cfg
     - sig-storage-gluster.tpl
     - ceph-repo.tpl.j2
     - epel-restricted.tpl

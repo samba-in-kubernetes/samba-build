@@ -50,12 +50,17 @@
 #endifarch
 %endif
 
-# Build vfs_glusterfs module by default
+# Do not build vfs_glusterfs on EL10
+%if 0%{?rhel} > 9
+%bcond_with vfs_glusterfs
+%else
 %ifarch aarch64 ppc64le s390x x86_64
 %bcond_without vfs_glusterfs
 %else
 %bcond_with vfs_glusterfs
 #endifarch
+%endif
+#endif rhel
 %endif
 
 # Build the ctdb-pcp-pmda package by default on Fedora

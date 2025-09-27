@@ -3,6 +3,7 @@
   become: no
   vars:
     refspec: "{{ refspec }}"
+    os: "fedora"
     os_vers: "{{ version | default('42') }}"
     os_arch: "{{ arch | default('x86_64') }}"
     vendor_dist: "{{ vendor_dist_suffix | default('%{nil}') }}"

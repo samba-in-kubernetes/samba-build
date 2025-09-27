@@ -26,13 +26,13 @@ ifneq ($(vendor_dist_suffix),)
 endif
 
 prep.dirs:
-	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml --extra-vars "$(EXTRA_VARS)"
+	@ansible-playbook --inventory localhost, ./ansible/prep.dirs.yml --skip-tags repos --extra-vars "$(EXTRA_VARS)"
 
 tarball:
-	@ansible-playbook --inventory localhost, ./ansible/make.tarball.yml --extra-vars "$(EXTRA_VARS)"
+	@ansible-playbook --inventory localhost, ./ansible/make.tarball.yml --skip-tags repos --extra-vars "$(EXTRA_VARS)"
 
 srpm:
-	@ansible-playbook --inventory localhost, ./ansible/build.srpm.yml --extra-vars "$(EXTRA_VARS)"
+	@ansible-playbook --inventory localhost, ./ansible/build.srpm.yml --skip-tags repos --extra-vars "$(EXTRA_VARS)"
 
 
 rpms.centos:

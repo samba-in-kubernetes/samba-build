@@ -1,0 +1,130 @@
+From 069aff6b3e7685f3886d1a06bfe01f6fde297770 Mon Sep 17 00:00:00 2001
+From: Alexander Bokovoy <ab@samba.org>
+Date: Wed, 3 Sep 2025 15:42:46 +0300
+Subject: [PATCH 1/2] ctdb: fix build against PCP 7.0.0
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=15904
+
+Signed-off-by: Alexander Bokovoy <ab@samba.org>
+Reviewed-by: Martin Schwenke <martin@meltin.net>
+
+Autobuild-User(master): Martin Schwenke <martins@samba.org>
+Autobuild-Date(master): Mon Sep  8 04:47:37 UTC 2025 on atb-devel-224
+
+(cherry picked from commit 83ff87f3dab0d6b22031614e9481b880f1dd99e8)
+---
+ ctdb/utils/pmda/pmda_ctdb.c | 11 ++++++++++-
+ ctdb/wscript                | 21 +++++++++++----------
+ 2 files changed, 21 insertions(+), 11 deletions(-)
+
+diff --git a/ctdb/utils/pmda/pmda_ctdb.c b/ctdb/utils/pmda/pmda_ctdb.c
+index 9df7f780652..3af54827501 100644
+--- a/ctdb/utils/pmda/pmda_ctdb.c
++++ b/ctdb/utils/pmda/pmda_ctdb.c
+@@ -41,10 +41,19 @@
+ 
+ #define pmID_cluster(id)	id->cluster
+ #define pmID_item(id)		id->item
++#endif
++
++#ifndef HAVE_PMGETPROGNAME
+ #define pmGetProgname()		pmProgname
++#endif
++#ifndef HAVE_PMSETPROGNAME
+ #define pmSetProgname(a)	__pmSetProgname(a)
+ #endif
+ 
++#ifdef HAVE_STRUCT_PMRESULT
++#define pmdaResult pmResult
++#endif
++
+ #include "domain.h"
+ 
+ /*
+@@ -451,7 +460,7 @@ err_out:
+  * instance domain evaluation.
+  */
+ static int
+-pmda_ctdb_fetch(int numpmid, pmID pmidlist[], pmResult **resp, pmdaExt *pmda)
++pmda_ctdb_fetch(int numpmid, pmID pmidlist[], pmdaResult **resp, pmdaExt *pmda)
+ {
+ 	int ret;
+ 
+diff --git a/ctdb/wscript b/ctdb/wscript
+index e9cd89436a3..6ab68dce870 100644
+--- a/ctdb/wscript
++++ b/ctdb/wscript
+@@ -226,16 +226,17 @@ def configure(conf):
+ 
+     have_pmda = False
+     if Options.options.ctdb_pmda:
+-        pmda_support = True
+-
+-        if not conf.CHECK_HEADERS('pcp/pmapi.h pcp/impl.h pcp/pmda.h',
+-                                  together=True):
+-            pmda_support = False
+-        if not conf.CHECK_FUNCS_IN('pmProgname', 'pcp'):
+-            pmda_support = False
+-        if not conf.CHECK_FUNCS_IN('pmdaDaemon', 'pcp_pmda'):
+-            pmda_support = False
+-        if pmda_support:
++        checks = [conf.CHECK_HEADERS('pcp/pmapi.h pcp/impl.h pcp/pmda.h',
++                                     together=True),
++                  conf.CHECK_FUNCS_IN('pmdaDaemon', 'pcp_pmda')]
++
++        have_progname = [conf.CHECK_FUNCS_IN('pmProgname', 'pcp'),
++                         conf.CHECK_FUNCS_IN('pmGetProgname', 'pcp'),
++                         conf.CHECK_FUNCS_IN('pmSetProgname', 'pcp')]
++
++        conf.CHECK_TYPE_IN('struct pmResult', 'pcp/pmapi.h')
++
++        if all(checks) and any(have_progname):
+             conf.CHECK_TYPE_IN('__pmID_int', 'pcp/pmapi.h pcp/impl.h')
+             have_pmda = True
+         else:
+-- 
+2.52.0
+
+
+From 7f184acb53f786f3bffb61569da280ab3b8b8e31 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Fri, 12 Sep 2025 15:37:38 +0200
+Subject: [PATCH 2/2] ctdb: Fix redefinitoin of pmdaResult
+
+../../ctdb/utils/pmda/pmda_ctdb.c:52:9: warning: 'pmdaResult' redefined
+   52 | #define pmdaResult pmResult
+      |         ^~~~~~~~~~
+In file included from ../../ctdb/utils/pmda/pmda_ctdb.c:35:
+/usr/include/pcp/pmda.h:30:9: note: this is the location of the previous definition
+   30 | #define pmdaResult pmResult_v2
+      |         ^~~~~~~~~~
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=15904
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+Reviewed-by: Alexander Bokovoy <ab@samba.org>
+
+Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
+Autobuild-Date(master): Sat Sep 13 08:12:42 UTC 2025 on atb-devel-224
+
+(cherry picked from commit d4b448c305f674646001e293d8aa6ebc0ca6dc77)
+---
+ ctdb/utils/pmda/pmda_ctdb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ctdb/utils/pmda/pmda_ctdb.c b/ctdb/utils/pmda/pmda_ctdb.c
+index 3af54827501..edf6ffc136b 100644
+--- a/ctdb/utils/pmda/pmda_ctdb.c
++++ b/ctdb/utils/pmda/pmda_ctdb.c
+@@ -50,7 +50,7 @@
+ #define pmSetProgname(a)	__pmSetProgname(a)
+ #endif
+ 
+-#ifdef HAVE_STRUCT_PMRESULT
++#if !defined(pmdaResult) && defined(HAVE_STRUCT_PMRESULT)
+ #define pmdaResult pmResult
+ #endif
+ 
+-- 
+2.52.0
+

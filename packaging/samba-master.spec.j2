@@ -1350,6 +1350,7 @@ install -d -m 0755 %{buildroot}%{_tmpfilesdir}
 echo "d /run/samba  755 root root" > %{buildroot}%{_tmpfilesdir}/samba.conf
 %if %{with clustering}
 echo "d /run/ctdb 755 root root" > %{buildroot}%{_tmpfilesdir}/ctdb.conf
+echo "d /run/samba/ctdb 755 root root" >> %{buildroot}%{_tmpfilesdir}/ctdb.conf
 %endif
 
 install -d -m 0755 %{buildroot}%{_sysusersdir}
@@ -1365,6 +1366,7 @@ EOF
 
 install -d -m 0755 %{buildroot}%{_sysconfdir}/ctdb
 install -m 0644 ctdb/config/ctdb.conf %{buildroot}%{_sysconfdir}/ctdb/ctdb.conf
+install -d -m 0755 %{buildroot}%{_localstatedir}/lib/samba/lock/ctdb
 %endif
 
 install -m 0644 %{SOURCE201} packaging/README.downgrade
@@ -2819,6 +2821,7 @@ fi
 %dir %{_localstatedir}/lib/ctdb/persistent
 %dir %{_localstatedir}/lib/ctdb/state
 %dir %{_localstatedir}/lib/ctdb/volatile
+%dir %{_localstatedir}/lib/samba/lock/ctdb
 
 %{_mandir}/man1/ctdb.1.gz
 %{_mandir}/man1/ctdb_diagnostics.1.gz

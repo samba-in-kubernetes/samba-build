@@ -2172,6 +2172,7 @@ fi
 
 ### DCERPCD
 %files dcerpcd
+%{_libexecdir}/samba/npsd_wsp_server
 %{_libexecdir}/samba/rpcd_classic
 %{_libexecdir}/samba/rpcd_epmapper
 %{_libexecdir}/samba/rpcd_fsrvp
@@ -2184,6 +2185,9 @@ fi
 %{_libexecdir}/samba/rpcd_spoolss
 %{_libexecdir}/samba/rpcd_winreg
 %{_libexecdir}/samba/samba-dcerpcd
+
+%dir %{_datadir}/samba/wsp
+%{_datadir}/samba/wsp/elasticsearch_mappings.json
 
 %{_mandir}/man8/samba-dcerpcd.8*
 
@@ -2686,6 +2690,7 @@ fi
 %{_bindir}/masktest
 %{_bindir}/ndrdump
 %{_bindir}/smbtorture
+%{_bindir}/wsp-to
 %{_mandir}/man1/gentest.1*
 %{_mandir}/man1/locktest.1*
 %{_mandir}/man1/masktest.1*

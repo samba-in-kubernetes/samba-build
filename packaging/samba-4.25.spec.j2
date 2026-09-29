@@ -93,6 +93,8 @@
 %bcond_with varlink
 %endif
 
+%bcond_without ratelimitd
+
 %bcond_without vfs_cephrgw
 
 %global baserelease 1
@@ -1270,6 +1272,9 @@ export python_LDFLAGS="$(echo ${LDFLAGS} | sed -e 's/-Wl,-z,defs//g')"
 %endif
 %if %{with varlink}
         --with-varlink \
+%endif
+%if %{with ratelimitd}
+        --with-ratelimitd \
 %endif
         --with-profiling-data \
         --with-systemd \

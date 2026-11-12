@@ -76,12 +76,8 @@
 %bcond_with pcp_pmda
 %endif
 
-# Build the etcd helpers by default on Fedora
-%if 0%{?fedora}
-%bcond_without etcd_mutex
-%else
+# Disable the etcd helpers by default
 %bcond_with etcd_mutex
-%endif
 
 %bcond_without gettext
 

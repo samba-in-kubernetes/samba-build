@@ -76,12 +76,8 @@
 %bcond_with pcp_pmda
 %endif
 
-# Build the etcd helpers by default on Fedora
-%if 0%{?fedora}
-%bcond_without etcd_mutex
-%else
+# Disable the etcd helpers by default
 %bcond_with etcd_mutex
-%endif
 
 %bcond_without gettext
 
@@ -2430,10 +2426,6 @@ fi
 %attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba3/Template.pm
 %dir %{perl_vendorlib}/Parse/Pidl/Samba4
 %attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba4/Header.pm
-%dir %{perl_vendorlib}/Parse/Pidl/Samba4/COM
-%attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba4/COM/Header.pm
-%attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba4/COM/Proxy.pm
-%attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba4/COM/Stub.pm
 %attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba4/Python.pm
 %attr(644,root,root) %{perl_vendorlib}/Parse/Pidl/Samba4/Template.pm
 %dir %{perl_vendorlib}/Parse/Pidl/Samba4/NDR
